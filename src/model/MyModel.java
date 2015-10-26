@@ -1,6 +1,7 @@
  package model;
 
 import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -10,6 +11,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.net.InetAddress;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -30,16 +33,21 @@ import general.Properties;
 import general.Solution;
 import io.*;
 
+
+
 /**
  * The Class MyModel.
  */
 public class MyModel extends Observable implements Model {
 
+	private static final String SOLVE = "solve";
+	private static final int PORT_NUMBER = 12345;
+	
 	/** The _mazes. */
 	HashMap<String,Future<SearchableMaze>> _mazes;
 	
 	/** The _solutions. */
-	HashMap<String,Future<Solution<Position>>> _solutions;
+	HashMap<String,Solution<Position>> _solutions;
 
 	HashMap<Maze3d, Solution<Position>> _solutionscache;
 	
@@ -53,26 +61,19 @@ public class MyModel extends Observable implements Model {
 	
 	ExecutorService executer;
 	
+	String workspace;
+	
 	/**
 	 * Instantiates a new my model.
 	 */
 	public MyModel() {
 		super();
 		this._mazes = new HashMap<String,Future<SearchableMaze>>();
-		this._solutions = new HashMap<String,Future<Solution<Position>>>();
-		try{
-			loadCache("c:\\temp\\cache.zip");
-			}
-		catch (Exception e) {
-			notifyObservers("Cache doesn`t exist");
-		}
-		
-		
-		
-		
+		this._solutions = new HashMap<String,Solution<Position>>();
 		executer = Executors.newFixedThreadPool(20); // change later
 		openfiles=0;
 		openthreads=0;
+		workspace = "c:\\temp\\";
 	}
 
 	/* (non-Javadoc)
@@ -263,10 +264,41 @@ public class MyModel extends Observable implements Model {
 	/* (non-Javadoc)
 	 * @see model.Model#solve(java.lang.String, java.lang.String)
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void solve(String name,String alg)
 	{
-		try {
+		
+		try{
+			InetAddress localaddr = InetAddress.getLocalHost();
+			System.out.println(localaddr.getHostAddress());
+			Socket myServer = new Socket(localaddr.getHostAddress(), 12345);
+			ObjectOutputStream output=new ObjectOutputStream(myServer.getOutputStream());
+			ObjectInputStream input=new ObjectInputStream(myServer.getInputStream());
+			output.writeObject(SOLVE);
+			output.flush();
+
+			
+			output.writeObject(_mazes.get(name));
+			System.out.println("Sent object");
+			output.flush();
+			try{
+			_solutions.put(name,(Solution<Position>)input.readObject());
+			}
+			catch (Exception e){
+				setChanged();
+				notifyObservers("Error Solving Maze " + name);
+			}
+			output.close();
+			input.close();
+			myServer.close();
+			setChanged();
+			notifyObservers("Display,2,1," + name);
+
+		}catch (Exception e) {}
+		
+		
+		/*try {
 			if (_solutionscache.get(_mazes.get(name).get()._newMaze) == null)
 			{		
 			try
@@ -311,7 +343,7 @@ public class MyModel extends Observable implements Model {
 			setChanged();
 			notifyObservers("Error Solving Maze " + name);
 			openthreads--;
-		}
+		}*/
 	}
 
 	
@@ -333,7 +365,7 @@ public class MyModel extends Observable implements Model {
 		if (_solutions.get(name) != null)
 		{
 		try {
-			return _solutions.get(name).get();
+			return _solutions.get(name);
 			} 
 		catch (Exception e) {
 				throw e;
@@ -342,7 +374,7 @@ public class MyModel extends Observable implements Model {
 		else
 		{
 			solve(name, "air");
-			return _solutions.get(name).get();
+			return _solutions.get(name);
 		}
 		
 	}
@@ -353,7 +385,7 @@ public class MyModel extends Observable implements Model {
 	@Override
 	public void exit() {
 		try{
-			saveCache("c:\\temp\\cache.zip");
+			saveCache(workspace+ "cache.zip");
 			}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -394,6 +426,16 @@ public class MyModel extends Observable implements Model {
 	public void setProperties(String file) throws Exception{
 		this.prop = new Properties();
 		prop.loadProp(file);
+		System.out.println(prop.getThreadcount());
+		executer = Executors.newFixedThreadPool(prop.getThreadcount());
+		workspace = prop.getWorkspace();
+		try{
+			loadCache(workspace + "cache.zip");
+			}
+		catch (Exception e) {
+			notifyObservers("Cache doesn`t exist");
+		}
+		
 	}
 
 
