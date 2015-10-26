@@ -278,9 +278,9 @@ public class MyModel extends Observable implements Model {
 			output.writeObject(SOLVE);
 			output.flush();
 
-			
-			output.writeObject(_mazes.get(name));
 			System.out.println("Sent object");
+
+			output.writeObject(_mazes.get(name).get()._newMaze);
 			output.flush();
 			try{
 			_solutions.put(name,(Solution<Position>)input.readObject());

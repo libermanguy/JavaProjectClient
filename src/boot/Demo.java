@@ -1,13 +1,10 @@
 package boot;
 
+import model.MyModel;
 import presenter.Presenter;
 
-import java.io.IOException;
-
-import model.MyModel;
 import view.MazeWindow;
 import view.MyView;
-import view.View;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -27,7 +24,6 @@ public class Demo {
 		MyModel mymodel=new MyModel();
 		Presenter presenter=null;
 		int option = 2;
-		
 		if (option == 1)
 		{
 			MyView myview=new MyView();
