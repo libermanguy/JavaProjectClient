@@ -268,17 +268,15 @@ public class MyModel extends Observable implements Model {
 	@Override
 	public void solve(String name,String alg)
 	{
-		
+		System.out.println("now solve");
 		try{
 			InetAddress localaddr = InetAddress.getLocalHost();
-			System.out.println(localaddr.getHostAddress());
 			Socket myServer = new Socket(localaddr.getHostAddress(), 12345);
 			ObjectOutputStream output=new ObjectOutputStream(myServer.getOutputStream());
 			ObjectInputStream input=new ObjectInputStream(myServer.getInputStream());
 			output.writeObject(SOLVE);
 			output.flush();
 
-			System.out.println("Sent object");
 
 			output.writeObject(_mazes.get(name).get()._newMaze);
 			output.flush();
@@ -293,7 +291,7 @@ public class MyModel extends Observable implements Model {
 			input.close();
 			myServer.close();
 			setChanged();
-			notifyObservers("Display,2,1," + name);
+		//	notifyObservers("Display,2,1," + name);
 
 		}catch (Exception e) {}
 		
@@ -426,7 +424,6 @@ public class MyModel extends Observable implements Model {
 	public void setProperties(String file) throws Exception{
 		this.prop = new Properties();
 		prop.loadProp(file);
-		System.out.println(prop.getThreadcount());
 		executer = Executors.newFixedThreadPool(prop.getThreadcount());
 		workspace = prop.getWorkspace();
 		try{
