@@ -41,8 +41,7 @@ import io.*;
 public class MyModel extends Observable implements Model {
 
 	private static final String SOLVE = "solve";
-	private static final int PORT_NUMBER = 12345;
-	
+
 	/** The _mazes. */
 	HashMap<String,Future<SearchableMaze>> _mazes;
 	
@@ -62,6 +61,10 @@ public class MyModel extends Observable implements Model {
 	ExecutorService executer;
 	
 	String workspace;
+	
+	String serveraddr;
+	
+	int serverport;
 	
 	/**
 	 * Instantiates a new my model.
@@ -269,8 +272,7 @@ public class MyModel extends Observable implements Model {
 	public void solve(String name,String alg)
 	{
 		try{
-			InetAddress localaddr = InetAddress.getLocalHost();
-			Socket myServer = new Socket(localaddr.getHostAddress(), 12345);
+			Socket myServer = new Socket(serveraddr, serverport);
 			ObjectOutputStream output=new ObjectOutputStream(myServer.getOutputStream());
 			ObjectInputStream input=new ObjectInputStream(myServer.getInputStream());
 			output.writeObject(SOLVE);
@@ -425,6 +427,8 @@ public class MyModel extends Observable implements Model {
 		prop.loadProp(file);
 		executer = Executors.newFixedThreadPool(prop.getThreadcount());
 		workspace = prop.getWorkspace();
+		serveraddr = prop.getServerip();
+		serverport = prop.getPort();
 		try{
 			loadCache(workspace + "cache.zip");
 			}

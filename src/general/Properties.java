@@ -3,6 +3,9 @@ package general;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.net.InetAddress;
+import java.net.InterfaceAddress;
+import java.net.UnknownHostException;
 
 import org.w3c.dom.Element;
 import javax.xml.parsers.DocumentBuilder;
@@ -24,12 +27,21 @@ public class Properties implements Serializable
 {
 	int threadcount;
 	String workspace;
+	String serverip;
 	int display;
+	int port;
 	
 	public Properties() {
-		threadcount =0;
-		display=0;
-		workspace="default";
+		threadcount =20;
+		display=2;
+		workspace="c:\\temp\\";
+		try {
+			String serverip=InetAddress.getLocalHost().getHostAddress();
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		port = 54321;
 	}
 	
 	public void loadProp(String file) throws Exception
@@ -45,6 +57,8 @@ public class Properties implements Serializable
 		threadcount = Integer.parseInt(e.getElementsByTagName("threadcount").item(0).getTextContent());
 		workspace =  e.getElementsByTagName("workspace").item(0).getTextContent();
 		display = Integer.parseInt(e.getElementsByTagName("display").item(0).getTextContent());
+		serverip =  e.getElementsByTagName("serverip").item(0).getTextContent();
+		port = Integer.parseInt(e.getElementsByTagName("port").item(0).getTextContent());
 	}
 	
 	public void saveProp(String file) throws Exception
@@ -69,6 +83,13 @@ public class Properties implements Serializable
 		e4.setTextContent(display+"");
 		e.appendChild(e4);
 		
+		Element e5 = doc.createElement("serverip");
+		e5.setTextContent(serverip);
+		e.appendChild(e5);
+		
+		Element e6 = doc.createElement("port");
+		e6.setTextContent(port+"");
+		e.appendChild(e6);
 		
 		TransformerFactory ts = TransformerFactory.newInstance();
 		Transformer transformer = ts.newTransformer();
@@ -86,6 +107,14 @@ public class Properties implements Serializable
 
 	public int getDisplay() {
 		return display;
+	}
+
+	public String getServerip() {
+		return serverip;
+	}
+
+	public int getPort() {
+		return port;
 	}
 	
 	
