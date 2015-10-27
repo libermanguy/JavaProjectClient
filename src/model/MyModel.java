@@ -268,7 +268,6 @@ public class MyModel extends Observable implements Model {
 	@Override
 	public void solve(String name,String alg)
 	{
-		System.out.println("now solve");
 		try{
 			InetAddress localaddr = InetAddress.getLocalHost();
 			Socket myServer = new Socket(localaddr.getHostAddress(), 12345);
@@ -387,7 +386,7 @@ public class MyModel extends Observable implements Model {
 			}
 		catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("error cache save");
+			notifyObservers("error cache save");
 		}
 		
 		

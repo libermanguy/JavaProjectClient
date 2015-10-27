@@ -397,14 +397,14 @@ public class MazeWindow extends BasicWindow implements View{
 				setChanged();
 				String args = "4 by x " + currentFloor + " for " + currentMaze;
 				String[] splited = args.split(" ");
+				setChanged();
+				notifyObservers(splited);
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				setChanged();
-				notifyObservers(splited);
 				maze.update();
 				maze.redraw();
 				floorText.setText("Floor " + currentFloor);
