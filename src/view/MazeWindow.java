@@ -1,6 +1,8 @@
 package view;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
+
+import java.io.File;
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -198,7 +200,7 @@ public class MazeWindow extends BasicWindow implements View{
 			public void widgetSelected(SelectionEvent arg0) {
 			FileDialog file = new FileDialog(shell);
 			file.open();
-			String args = "14 " + file.getFilterPath()+"\\"+file.getFileName();
+			String args = "14 " + new File(file.getFilterPath(), file.getFileName()).getAbsolutePath();
 			String[] splited = args.split(" ");
 			setChanged();
 			notifyObservers(splited);
