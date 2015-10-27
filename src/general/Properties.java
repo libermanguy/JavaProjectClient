@@ -36,7 +36,7 @@ public class Properties implements Serializable
 		display=2;
 		workspace="c:\\temp\\";
 		try {
-			String serverip=InetAddress.getLocalHost().getHostAddress();
+			serverip = InetAddress.getLocalHost().getHostAddress();
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
