@@ -68,11 +68,12 @@ public class MazeWindow extends BasicWindow implements View{
 		generateButton=new Button(shell, SWT.PUSH);
 		generateButton.setText("Generate");
 		generateButton.setLayoutData(new GridData(SWT.FILL, SWT.None, false, false, 1, 1));
-			
+		generateButton.setEnabled(false);
 		
 		//MazeDisplayer maze=new Maze2D(shell, SWT.BORDER);		
 		maze=new Maze3D(shell, SWT.BORDER);
 		maze.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,true,1,4));
+		
 		
 		displayButton=new Button(shell, SWT.PUSH);
 		displayButton.setText("Display");
@@ -204,6 +205,7 @@ public class MazeWindow extends BasicWindow implements View{
 			String[] splited = args.split(" ");
 			setChanged();
 			notifyObservers(splited);
+			generateButton.setEnabled(true);
 			}
 			
 			@Override
