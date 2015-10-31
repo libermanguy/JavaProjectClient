@@ -25,26 +25,71 @@ import general.Position;
 import general.Solution;
 import general.State;
 
+// TODO: Auto-generated Javadoc
+//TODO: Auto-generated Javadoc
+/**
+* 
+*  * <h1>The Class MazeWindows.</h1>
+* Represents GUI  of Maze3D game 
+* <p>
+*
+* @author  Guy Liberman & Omri Polnikviat
+* @version 1.0
+* @since   2015-10-31
+*/
 public class MazeWindow extends BasicWindow implements View{
 
+	/** The timer. */
 	Timer timer;
+	
+	/** The task. */
 	TimerTask task;
+	
+	/** The display button. */
 	Button displayButton;
+	
+	/** The solve button. */
 	Button solveButton;
+	
+	/** The hint button. */
 	Button hintButton;
+	
+	/** The generate button. */
 	Button generateButton;
+	
+	/** The maze. */
 	MazeDisplayer maze;
+	
+	/** The current floor. */
 	int currentFloor;
+	
+	/** The future floor. */
 	int futureFloor;
+	
+	/** The top floor. */
 	int topFloor;
+	
+	/** The current maze. */
 	String currentMaze;
+	
+	/** The floor text. */
 	Label floorText;
 	
+	/**
+	 * Instantiates a new maze window.
+	 *
+	 * @param title the title
+	 * @param width the width
+	 * @param height the height
+	 */
 	public MazeWindow(String title, int width, int height) {
 		super(title, width, height);
 		currentFloor = 0;
 	}
 
+	/* (non-Javadoc)
+	 * @see view.BasicWindow#initWidgets()
+	 */
 	@Override
 	void initWidgets() {
 		shell.forceFocus();
@@ -321,6 +366,9 @@ public class MazeWindow extends BasicWindow implements View{
 		
 	}
 	
+	/* (non-Javadoc)
+	 * @see view.View#display(java.lang.Object[])
+	 */
 	/*
 	public static void main(String[] args) {
 		MazeWindow win=new MazeWindow("maze example", 500, 300);
@@ -333,12 +381,18 @@ public class MazeWindow extends BasicWindow implements View{
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see view.View#Dir(java.lang.String)
+	 */
 	@Override
 	public void Dir(String path) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see view.View#displayMaze(java.lang.Object[])
+	 */
 	@Override
 	public void displayMaze(Object[] obj) {
 		Position start = (Position)obj[4];
@@ -356,6 +410,9 @@ public class MazeWindow extends BasicWindow implements View{
 		maze.redraw();
 	}
 
+	/* (non-Javadoc)
+	 * @see view.View#displayCrossSection(java.lang.Object[])
+	 */
 	@Override
 	public void displayCrossSection(Object[] array) {
 		int[][] newmaze = (int[][])array;
@@ -376,18 +433,27 @@ public class MazeWindow extends BasicWindow implements View{
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see view.View#displayMazeSize(int)
+	 */
 	@Override
 	public void displayMazeSize(int size) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see view.View#displayFileSize(int)
+	 */
 	@Override
 	public void displayFileSize(int size) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see view.View#displaySolution(general.Solution)
+	 */
 	@Override
 	public void displaySolution(Solution<Position> solution) {
 		for (State<Position> step : solution.get_steps()) {
@@ -432,6 +498,9 @@ public class MazeWindow extends BasicWindow implements View{
 		finish();
 	}
 
+	/* (non-Javadoc)
+	 * @see view.View#displayStr(java.lang.String)
+	 */
 	@Override
 	public void displayStr(String arg) {
 		MessageBox box = new MessageBox(shell,SWT.ICON_ERROR);
@@ -441,6 +510,9 @@ public class MazeWindow extends BasicWindow implements View{
 		
 	}
 	
+	/* (non-Javadoc)
+	 * @see view.View#displayNextStep(general.State)
+	 */
 	public void displayNextStep(State<Position> step)
 	{
 		Position pos = step.getState();
@@ -472,12 +544,18 @@ public class MazeWindow extends BasicWindow implements View{
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see view.View#setCLI(java.util.HashMap)
+	 */
 	@Override
 	public void setCLI(HashMap<String, Integer> commands) {
 		// TODO Auto-generated method stub
 		
 	}
 	
+	/**
+	 * Finish.
+	 */
 	public void finish()
 	{
 		if (maze.isFinished())

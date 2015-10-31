@@ -4,22 +4,17 @@ import general.Solution;
 
 //TODO: Auto-generated Javadoc
 /**
-* 
-* <h1> The Interface Model.</h1>
-* Represents the Model layer on MVP architecture design - client side 
-* 
-*  <p>
-* @param <T> the generic type
-* @author  Guy Liberman & Omri Polnikviat
-* @version 1.0
-* @since   2015-10-31
-*/
-
-
-// TODO: Auto-generated Javadoc
-/**
+ * <h1> The Interface Model.</h1>
+ * Represents the Model layer on MVP architecture design - client side 
  * 
+ *  <p>
+ *
+ * @author  Guy Liberman & Omri Polnikviat
+ * @version 1.0
+ * @since   2015-10-31
  */
+
+
 public interface Model {
 	
 	/**
@@ -74,7 +69,7 @@ public interface Model {
 	 * Maze size.
 	 *
 	 * @param name the name
-	 * @return the int
+	 * @return the size 
 	 * @throws Exception the exception
 	 */
 	public int mazeSize(String name) throws Exception;
@@ -83,7 +78,7 @@ public interface Model {
 	 * File size.
 	 *
 	 * @param name the name
-	 * @return the int
+	 * @return the file size
 	 */
 	public int fileSize(String name);
 	
@@ -91,7 +86,7 @@ public interface Model {
 	 * Solve.
 	 *
 	 * @param name the name
-	 * @param alg the alg
+	 * @param alg the algorithm
 	 */
 	public void solve(String name,String alg);
 	
@@ -108,7 +103,7 @@ public interface Model {
 	 * Exit.
 	 *
 	 * @param name the name
-	 * @param newpos the newpos
+	 * @param newpos the new start position
 	 * @throws Exception the exception
 	 */
 	

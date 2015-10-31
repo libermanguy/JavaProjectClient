@@ -33,13 +33,22 @@ import general.Properties;
 import general.Solution;
 import io.*;
 
-
-
+// TODO: Auto-generated Javadoc
 /**
- * The Class MyModel.
+ * <h1> The The Class MyModel.</h1>
+ * Represents the Model layer on MVP architecture design - client side 
+ * 
+ *  <p>
+ *
+ * @author  Guy Liberman & Omri Polnikviat
+ * @version 1.0
+ * @since   2015-10-31
  */
+
+
 public class MyModel extends Observable implements Model {
 
+	/** The Constant SOLVE. */
 	private static final String SOLVE = "solve";
 
 	/** The _mazes. */
@@ -48,6 +57,7 @@ public class MyModel extends Observable implements Model {
 	/** The _solutions. */
 	HashMap<String,Solution<Position>> _solutions;
 
+	/** The _solutionscache. */
 	HashMap<Maze3d, Solution<Position>> _solutionscache;
 	
 	/** The openfiles. */
@@ -56,14 +66,19 @@ public class MyModel extends Observable implements Model {
 	/** The openthreads. */
 	int openthreads;
 	
+	/** The prop. */
 	Properties prop;
 	
+	/** The executer. */
 	ExecutorService executer;
 	
+	/** The workspace. */
 	String workspace;
 	
+	/** The serveraddr. */
 	String serveraddr;
 	
+	/** The serverport. */
 	int serverport;
 	
 	/**
@@ -231,6 +246,12 @@ public class MyModel extends Observable implements Model {
 		return (int) f.length();
 	}
 
+	/**
+	 * Save cache.
+	 *
+	 * @param file the file
+	 * @throws Exception the exception
+	 */
 	public void saveCache(String file) throws Exception
 	{
 		OutputStream fileOut=new FileOutputStream(file);
@@ -246,6 +267,12 @@ public class MyModel extends Observable implements Model {
 	//	notifyObservers("finish saving caching");
 	}
 	
+	/**
+	 * Load cache.
+	 *
+	 * @param file the file
+	 * @throws Exception the exception
+	 */
 	@SuppressWarnings("unchecked")
 	
 	public void loadCache(String file) throws Exception
@@ -407,6 +434,9 @@ public class MyModel extends Observable implements Model {
 		notifyObservers("Finish closing Model");
 	}
 
+	/* (non-Javadoc)
+	 * @see model.Model#setStartPosition(java.lang.String, general.Position)
+	 */
 	@Override
 	public void setStartPosition(String name, Position newpos) throws Exception{
 		SearchableMaze currentmaze = _mazes.get(name).get();
@@ -422,6 +452,9 @@ public class MyModel extends Observable implements Model {
 		);
 	}
 	
+	/* (non-Javadoc)
+	 * @see model.Model#setProperties(java.lang.String)
+	 */
 	public void setProperties(String file) throws Exception{
 		this.prop = new Properties();
 		prop.loadProp(file);

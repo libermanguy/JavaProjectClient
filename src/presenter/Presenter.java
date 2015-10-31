@@ -8,6 +8,17 @@ import general.Position;
 import model.Model;
 import view.View;
 
+//TODO: Auto-generated Javadoc
+/**
+* <h1> The The Class Presenter.</h1>
+* Represents the Presenter layer on MVP architecture design - client side 
+* 
+*  <p>
+*
+* @author  Guy Liberman & Omri Polnikviat
+* @version 1.0
+* @since   2015-10-31
+*/
 public class Presenter implements Observer {
 
 	/** The model. */
@@ -17,6 +28,12 @@ public class Presenter implements Observer {
 	View view;
 	
 	
+	/**
+	 * Instantiates a new presenter.
+	 *
+	 * @param model the model
+	 * @param view the view
+	 */
 	public Presenter(Model model, View view) {
 		super();
 		this.model = model;
@@ -39,6 +56,9 @@ public class Presenter implements Observer {
 		view.setCLI(commands);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 

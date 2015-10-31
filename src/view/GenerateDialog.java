@@ -11,41 +11,99 @@ package view;
 	import org.eclipse.swt.widgets.Label;
 	import org.eclipse.swt.widgets.Shell;
 	import org.eclipse.swt.widgets.Text;
+	//TODO: Auto-generated Javadoc
+	/**
+	* 
+	*  * <h1>The Class GenerateDialog.</h1>
+	* Represents dialog of generate button
+	* <p>
+	*
+	* @author  Guy Liberman & Omri Polnikviat
+	* @version 1.0
+	* @since   2015-10-31
+	*/
+	
 
 	class GenerateDialog extends Dialog {
-	  private String message;
-	  private String name;
-	  private String x;
-	  private String y;
-	  private String z;
+	  
+  	/** The message. */
+  	private String message;
+	  
+  	/** The name. */
+  	private String name;
+	  
+  	/** The x. */
+  	private String x;
+	  
+  	/** The y. */
+  	private String y;
+	  
+  	/** The z. */
+  	private String z;
 
-	  public GenerateDialog(Shell parent) {
+	  /**
+  	 * Instantiates a new generate dialog.
+  	 *
+  	 * @param parent the parent
+  	 */
+  	public GenerateDialog(Shell parent) {
 	    this(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
 	  }
 
-	  public GenerateDialog(Shell parent, int style) {
+	  /**
+  	 * Instantiates a new generate dialog.
+  	 *
+  	 * @param parent the parent
+  	 * @param style the style
+  	 */
+  	public GenerateDialog(Shell parent, int style) {
 	    super(parent, style);
 	    setText("Generate Maze");
 	    setMessage("Please enter a values:");
 	  }
 
-	  public String getMessage() {
+	  /**
+  	 * Gets the message.
+  	 *
+  	 * @return the message
+  	 */
+  	public String getMessage() {
 	    return message;
 	  }
 
-	  public void setMessage(String message) {
+	  /**
+  	 * Sets the message.
+  	 *
+  	 * @param message the new message
+  	 */
+  	public void setMessage(String message) {
 	    this.message = message;
 	  }
 
-	  public String getInput() {
+	  /**
+  	 * Gets the input.
+  	 *
+  	 * @return the input
+  	 */
+  	public String getInput() {
 	    return name;
 	  }
 
-	  public void setInput(String input) {
+	  /**
+  	 * Sets the input.
+  	 *
+  	 * @param input the new input
+  	 */
+  	public void setInput(String input) {
 	    this.name = input;
 	  }
 
-	  public String open() {
+	  /**
+  	 * Open.
+  	 *
+  	 * @return the string
+  	 */
+  	public String open() {
 	    Shell shell = new Shell(getParent(), getStyle());
 	    shell.setText(getText());
 	    createContents(shell);
@@ -60,7 +118,12 @@ package view;
 	    return name + " " + x + " " + y + " " + z;
 	  }
 
-	  private void createContents(final Shell shell) {
+	  /**
+  	 * Creates the contents.
+  	 *
+  	 * @param shell the shell
+  	 */
+  	private void createContents(final Shell shell) {
 	    shell.setLayout(new GridLayout(2, true));
 
 	    Label labelMaze = new Label(shell, SWT.NONE);

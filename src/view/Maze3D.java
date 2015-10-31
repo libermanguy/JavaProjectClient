@@ -9,15 +9,46 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.widgets.Composite;
 
+//TODO: Auto-generated Javadoc
+/**
+* 
+*  * <h1>The Class Maze3d.</h1>
+* Represents MazeDisplayer of type Maze3D
+* <p>
+*
+* @author  Guy Liberman & Omri Polnikviat
+* @version 1.0
+* @since   2015-10-31
+*/
+
+
 public class Maze3D extends MazeDisplayer {
 
+	/** The character x. */
 	public int characterX=-1;
+	
+	/** The character y. */
 	public int characterY=-1;
+	
+	/** The character floor. */
 	public int characterFloor;
+	
+	/** The exit x. */
 	public int exitX=-1;
+	
+	/** The exit y. */
 	public int exitY=-1;
+	
+	/** The exit floor. */
 	public int exitFloor;
 	
+	/**
+	 * Paint cube.
+	 *
+	 * @param p the p
+	 * @param h the h
+	 * @param e the e
+	 */
 	private void paintCube(double[] p,double h,PaintEvent e){
         int[] f=new int[p.length];
         for(int k=0;k<f.length;f[k]=(int)Math.round(p[k]),k++);
@@ -36,6 +67,13 @@ public class Maze3D extends MazeDisplayer {
         e.gc.fillPolygon(r);
 		
 	}
+	
+	/**
+	 * Instantiates a new maze3 d.
+	 *
+	 * @param parent the parent
+	 * @param style the style
+	 */
 	public Maze3D(Composite parent, int style) {
 		super(parent, style);
 		
@@ -88,6 +126,12 @@ public class Maze3D extends MazeDisplayer {
 		});
 	}
 	
+	/**
+	 * Move character.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 */
 	private void moveCharacter(int x,int y){
 		if(x>=0 && x<mazeData[0].length && y>=0 && y<mazeData.length && mazeData[y][x]==0){
 			characterX=x;
@@ -143,6 +187,9 @@ public class Maze3D extends MazeDisplayer {
 		moveCharacter(x, y);
 	}
 	
+	/* (non-Javadoc)
+	 * @see view.MazeDisplayer#setCharacterPosition(int, int)
+	 */
 	@Override
 	public void setCharacterPosition(int row, int col) {
 		characterX=col;
@@ -150,24 +197,41 @@ public class Maze3D extends MazeDisplayer {
 		moveCharacter(col,row);
 	}
 
+	/* (non-Javadoc)
+	 * @see view.MazeDisplayer#setExitPosition(int, int)
+	 */
 	public void setExitPosition(int row, int col) {
 		exitX=col;
 		exitY=row;
 	}
 	
+	/* (non-Javadoc)
+	 * @see view.MazeDisplayer#setExitFloor(int)
+	 */
 	public void setExitFloor(int floor) {
 		exitFloor=floor;
 }
+	
+	/* (non-Javadoc)
+	 * @see view.MazeDisplayer#getCharacterPosition()
+	 */
 	public int[] getCharacterPosition()
 	{
 		int[] arr = { characterX, characterY };
 		return arr;
 	}
+	
+	/* (non-Javadoc)
+	 * @see view.MazeDisplayer#setCharacterFloor(int)
+	 */
 	public void setCharacterFloor(int floor)
 	{
 		characterFloor = floor;
 	}
 
+	/* (non-Javadoc)
+	 * @see view.MazeDisplayer#isFinished()
+	 */
 	@Override
 	public boolean isFinished() {
 		if ( characterX == exitX && characterY == exitY && characterFloor == exitFloor)

@@ -6,10 +6,18 @@ import general.Position;
 import general.Solution;
 import general.State;
 
-// TODO: Auto-generated Javadoc
+//TODO: Auto-generated Javadoc
+//TODO: Auto-generated Javadoc
 /**
- * The Interface View.
- */
+* 
+*  * <h1>The Class MyView.</h1>
+* Represents the view Interface layer in MVP architecture 
+* <p>
+*
+* @author  Guy Liberman & Omri Polnikviat
+* @version 1.0
+* @since   2015-10-31
+*/
 public interface View {
 	
 	/**
@@ -68,8 +76,18 @@ public interface View {
 	 */
 	public void displayStr(String arg);
 
+	/**
+	 * Sets the cli.
+	 *
+	 * @param commands the commands
+	 */
 	public void setCLI(HashMap<String, Integer> commands);
 
+	/**
+	 * Display next step.
+	 *
+	 * @param state the state
+	 */
 	public void displayNextStep(State<Position> state);
 
 	

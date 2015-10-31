@@ -7,17 +7,17 @@ import algorithms.search.CommonSearchable;
 import general.Position;
 import general.State;
 
+
 // TODO: Auto-generated Javadoc
 /**
  * 
  *  * <h1>SearchableMaze</h1>
- * The Maze Demo Class
+ * Searchable class of type maze3d
  * <p>
- * Runs All Searchers For Test
  *
- * @author  Guy Liberman
+ * @author  Guy Liberman & Omri Polnikviat
  * @version 1.0
- * @since   2015-08-22
+ * @since   2015-10-31
  */
 public class SearchableMaze extends CommonSearchable<Position> {
 

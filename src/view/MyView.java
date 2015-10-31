@@ -15,9 +15,18 @@ import general.Position;
 import general.Solution;
 import general.State;
 
+//TODO: Auto-generated Javadoc
+//TODO: Auto-generated Javadoc
 /**
- * The Class MyView.
- */
+* 
+*  * <h1>The Class MyView.</h1>
+* Represents client side CLI 
+* <p>
+*
+* @author  Guy Liberman & Omri Polnikviat
+* @version 1.0
+* @since   2015-10-31
+*/
 public class MyView extends Observable implements View
 {
 	
@@ -57,6 +66,9 @@ public class MyView extends Observable implements View
 	}
 	
 
+	/**
+	 * Start cli.
+	 */
 	public void startCLI(){
 		cli.start();
 	}
@@ -115,11 +127,17 @@ public class MyView extends Observable implements View
 		System.out.println(solution.toString());
 	}
 	
+	/**
+	 * Change.
+	 */
 	public void change()
 	{
 		setChanged();
 	}
 	
+	/* (non-Javadoc)
+	 * @see view.View#setCLI(java.util.HashMap)
+	 */
 	public void setCLI(HashMap<String,Integer> cmdsHM) {
 		cli=new CLI(new BufferedReader(new InputStreamReader(System.in)), 
 				new PrintWriter(new OutputStreamWriter(System.out)), cmdsHM);
@@ -127,6 +145,9 @@ public class MyView extends Observable implements View
 	}
 	
 	
+	/**
+	 * The Class CLI.
+	 */
 	public class CLI extends Thread{
 		
 		/** The input . */
@@ -296,6 +317,9 @@ public class MyView extends Observable implements View
 	}
 
 
+	/* (non-Javadoc)
+	 * @see view.View#displayNextStep(general.State)
+	 */
 	@Override
 	public void displayNextStep(State<Position> state) {
 		// TODO Auto-generated method stub
