@@ -1,10 +1,24 @@
-	package model;
+package model;
 import general.Position;
 import general.Solution;
 
+//TODO: Auto-generated Javadoc
+/**
+* 
+* <h1> The Interface Model.</h1>
+* Represents the Model layer on MVP architecture design - client side 
+* 
+*  <p>
+* @param <T> the generic type
+* @author  Guy Liberman & Omri Polnikviat
+* @version 1.0
+* @since   2015-10-31
+*/
+
+
 // TODO: Auto-generated Javadoc
 /**
- * The Interface Model.
+ * 
  */
 public interface Model {
 	
@@ -23,7 +37,7 @@ public interface Model {
 	 *
 	 * @param name the name
 	 * @return the object[]
-	 * @throws Exception 
+	 * @throws Exception the exception
 	 */
 	public Object[] display(String name) throws Exception;
 	
@@ -34,7 +48,7 @@ public interface Model {
 	 * @param dim the dim
 	 * @param index the index
 	 * @return the cross section
-	 * @throws Exception 
+	 * @throws Exception the exception
 	 */
 	public Object getCrossSection(String name,char dim,int index) throws Exception;
 	
@@ -61,7 +75,7 @@ public interface Model {
 	 *
 	 * @param name the name
 	 * @return the int
-	 * @throws Exception 
+	 * @throws Exception the exception
 	 */
 	public int mazeSize(String name) throws Exception;
 	
@@ -86,16 +100,30 @@ public interface Model {
 	 *
 	 * @param name the name
 	 * @return the solution
-	 * @throws Exception 
+	 * @throws Exception the exception
 	 */
 	public Solution<Position> displaySolution(String name) throws Exception;
 	
 	/**
 	 * Exit.
+	 *
+	 * @param name the name
+	 * @param newpos the newpos
+	 * @throws Exception the exception
 	 */
 	
 	public void setStartPosition(String name, Position newpos) throws Exception;
+	
+	/**
+	 * Exit.
+	 */
 	public void exit();
 	
+	/**
+	 * Sets the properties.
+	 *
+	 * @param file the new properties
+	 * @throws Exception the exception
+	 */
 	public void setProperties(String file) throws Exception;
 }
