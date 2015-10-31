@@ -3,8 +3,6 @@ package algorithms.search;
 
 import static org.junit.Assert.*;
 
-import model.*;
-
 import org.junit.Test;
 
 import algorithms.mazeGenerators.Maze3d;
@@ -21,6 +19,7 @@ import general.Position;
 * @version 1.0
 * @since   2015-10-31
 */
+import model.SearchableMaze;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -35,7 +34,7 @@ public class SearcherAStarTest {
 	public void testGetNumberOfNodesEvaluated() {
 		MyMaze3dGenerator mg = new MyMaze3dGenerator();
 		Maze3d newmaze  = mg.generate(10,10,10);	
-		SearchableMaze searchable = new SearchableMaze(newmaze);
+		new SearchableMaze(newmaze);
 		Searcher<Position> searcher = new SearcherAStar<Position>(new HeuristicAirLine());
 		assertEquals(0, searcher.getNumberOfNodesEvaluated());
 	}
@@ -45,7 +44,7 @@ public class SearcherAStarTest {
 	 */
 	@Test
 	public void testSearcherAStar() {
-		Searcher<Position> searcher = new SearcherAStar<Position>(null);
+		new SearcherAStar<Position>(null);
 	}
 
 	/**
@@ -55,7 +54,7 @@ public class SearcherAStarTest {
 	public void testSearch() {
 		MyMaze3dGenerator mg = new MyMaze3dGenerator();
 		Maze3d newmaze  = mg.generate(10,10,10);	
-		SearchableMaze searchable = new SearchableMaze(newmaze);
+		new SearchableMaze(newmaze);
 		Searcher<Position> searcher = new SearcherAStar<Position>(new HeuristicAirLine());
 		searcher.search(null);
 		searcher = new SearcherAStar<Position>(new HeuristicManhattan());
