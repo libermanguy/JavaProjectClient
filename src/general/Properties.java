@@ -1,11 +1,11 @@
-/*
- * 
- */
 package general;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.net.InetAddress;
+import java.net.InterfaceAddress;
+import java.net.UnknownHostException;
 
 import org.w3c.dom.Element;
 import javax.xml.parsers.DocumentBuilder;
@@ -16,7 +16,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-
+import org.eclipse.swt.widgets.List;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -26,7 +26,7 @@ import org.xml.sax.SAXException;
 /**
 * 
 *  * <h1>Properties</h1>
-* The Server Properties file
+* The client Properties Class
 * <p>
 * 
 *
@@ -41,29 +41,38 @@ public class Properties implements Serializable
 	/** The threadcount. */
 	int threadcount;
 	
-	/** The port. */
-	int port;
-	
-	/** The concurrentusers. */
-	int concurrentusers; 
-	
 	/** The workspace. */
 	String workspace;
+	
+	/** The serverip. */
+	String serverip;
+	
+	/** The display. */
+	int display;
+	
+	/** The port. */
+	int port;
 	
 	/**
 	 * Instantiates a new properties.
 	 */
 	public Properties() {
-		threadcount = 5;
-		port=2000;
-		concurrentusers = 5;
+		threadcount =20;
+		display=2;
 		workspace="default";
+		try {
+			serverip = InetAddress.getLocalHost().getHostAddress();
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		port = 54321;
 	}
 	
 	/**
 	 * Load prop.
 	 *
-	 * @param file the properties file
+	 * @param file the file
 	 * @throws Exception the exception
 	 */
 	public void loadProp(String file) throws Exception
@@ -77,15 +86,16 @@ public class Properties implements Serializable
 		Node n = nlist.item(0);
 		Element e = (Element)n;
 		threadcount = Integer.parseInt(e.getElementsByTagName("threadcount").item(0).getTextContent());
-		port = Integer.parseInt(e.getElementsByTagName("port").item(0).getTextContent());
-		concurrentusers = Integer.parseInt(e.getElementsByTagName("concurrentusers").item(0).getTextContent());
 		workspace =  e.getElementsByTagName("workspace").item(0).getTextContent();
+		display = Integer.parseInt(e.getElementsByTagName("display").item(0).getTextContent());
+		serverip =  e.getElementsByTagName("serverip").item(0).getTextContent();
+		port = Integer.parseInt(e.getElementsByTagName("port").item(0).getTextContent());
 	}
 	
 	/**
 	 * Save prop.
 	 *
-	 * @param file the properties file
+	 * @param file the file
 	 * @throws Exception the exception
 	 */
 	public void saveProp(String file) throws Exception
@@ -100,17 +110,22 @@ public class Properties implements Serializable
 		Element e2 = doc.createElement("threadcount");
 		e2.setTextContent(threadcount+"");
 		e.appendChild(e2);
-
-		Element e4 = doc.createElement("port");
-		e4.setTextContent(port+"");
+		
+		
+		Element e3 = doc.createElement("workspace");
+		e3.setTextContent(workspace);
+		e.appendChild(e3);
+		
+		Element e4 = doc.createElement("display");
+		e4.setTextContent(display+"");
 		e.appendChild(e4);
 		
-		Element e5 = doc.createElement("concurrentusers");
-		e5.setTextContent(concurrentusers+"");
+		Element e5 = doc.createElement("serverip");
+		e5.setTextContent(serverip);
 		e.appendChild(e5);
-				
-		Element e6 = doc.createElement("workspace");
-		e6.setTextContent(workspace	);
+		
+		Element e6 = doc.createElement("port");
+		e6.setTextContent(port+"");
 		e.appendChild(e6);
 		
 		TransformerFactory ts = TransformerFactory.newInstance();
@@ -120,30 +135,12 @@ public class Properties implements Serializable
 		}
 
 	/**
-	 * Gets the thread count from the properties file.
+	 * Gets the threadcount.
 	 *
 	 * @return the threadcount
 	 */
 	public int getThreadcount() {
 		return threadcount;
-	}
-
-	/**
-	 * Gets the port.
-	 *
-	 * @return the port
-	 */
-	public int getPort() {
-		return port;
-	}
-
-	/**
-	 * Gets the allowed number of clients.
-	 *
-	 * @return the concurrentusers
-	 */
-	public int getConcurrentusers() {
-		return concurrentusers;
 	}
 
 	/**
@@ -154,5 +151,33 @@ public class Properties implements Serializable
 	public String getWorkspace() {
 		return workspace;
 	}
+
+	/**
+	 * Gets the display.
+	 *
+	 * @return the display
+	 */
+	public int getDisplay() {
+		return display;
+	}
+
+	/**
+	 * Gets the serverip.
+	 *
+	 * @return the serverip
+	 */
+	public String getServerip() {
+		return serverip;
+	}
+
+	/**
+	 * Gets the port.
+	 *
+	 * @return the port
+	 */
+	public int getPort() {
+		return port;
+	}
+	
 	
 }
